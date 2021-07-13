@@ -1,0 +1,31 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install
+  - docker build -t emarketersharma/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true emarketersharma/react-test npm test -- --coverage
+
+after_success
+  - docker build -t emarketersharma/multi-client ./client
+  - docker build -t emarketersharma/multi-nginx ./nginx
+  - docker build -t emarketersharma/multi-server ./server
+  - docker build -t emarketersharma/multi-worker ./worker
+
+  # LOGIN to the docker CLI
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin_open
+
+  # Take those images and push to docker hub
+  - docker push emarketersharma/multi-client
+  - docker push emarketersharma/multi-nginx
+  - docker push emarketersharma/multi-server
+  - docker push emarketersharma/multi-worker
+  
+
+
+
+
