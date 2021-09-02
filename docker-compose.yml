@@ -1,11 +1,11 @@
 version: '3'
 services:
   client:
-    image: "emarketersharma/multi-client",
+    image: "emarketersharma/multi-client"
     mem_limit: 128m
     hostname: client
   server:
-    image: "emarketersharma/multi-server",
+    image: "emarketersharma/multi-server"
     mem_limit: 128m
     hostname: client
     environment:
@@ -17,14 +17,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "emarketersharma/multi-worker",
+    image: "emarketersharma/multi-worker"
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "emarketersharma/multi-nginx",
+    image: "emarketersharma/multi-nginx"
     mem_limit: 128m
     hostname: nginx
     ports:
