@@ -7,7 +7,7 @@ services:
   server:
     image: "emarketersharma/multi-server"
     mem_limit: 128m
-    hostname: client
+    hostname: api
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
@@ -28,5 +28,5 @@ services:
     mem_limit: 128m
     hostname: nginx
     ports:
-      - '80:80'
+      - "80:80"
 
